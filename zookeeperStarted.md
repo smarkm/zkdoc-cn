@@ -1,16 +1,16 @@
 ## Zookeeper入门指南
 ### Getting Started:Zookeeper分布式应用协调服务
-- 先决条件
-- 下载
-- 独立运行
-- ZooKeeper存储管理
-- 连接到ZooKeeper
-- ZooKeeper编程
-- 运行副本ZooKeeper
-- 其他优化
+- [先决条件]()
+- [下载]()
+- [独立运行]()
+- [ZooKeeper存储管理]()
+- [连接到ZooKeeper]()
+- [ZooKeeper编程]()
+- [运行ZooKeeper副本]()
+- [其他优化]()
 - --
 ### Getting Started:Zookeeper分布式应用协调服务
-本文档能够让你快速了解是使用ZooKeeper。它主要针对的是开发商希望试试，并包含一个ZooKeeper服务器简单的安装说明，一些命令来验证它的运行，以及简单的编程实例。例如运行复制部署，优化事务日志。然而，商业部署的完整说明，请参阅[ZooKeeper管理员指南]().
+本文档能够让你快速了解是使用ZooKeeper。它的目的主要是在开发人员希望尝试它，并包含一个ZooKeeper服务器简单的安装说明，包含一些命令来验证它的运行，以及简单的编程实例。例如运行复制部署，优化事务日志。然而，产品化部署的完整说明，请参阅[ZooKeeper管理员指南]().
 
 ###	先决条件
 在管理指南中参见[系统要求]()。
@@ -19,7 +19,7 @@
 获取ZooKeeper，从Apache下载最近的一个[稳定](http://zookeeper.apache.org/releases.html)版本的镜像。
 
 ### 独立运行
-建立在独立模式下一个ZooKeeper服务器很简单。该服务器包含在一个单一的罐子文件中，所以安装包括创建一个配置。
+建立在独立模式下一个ZooKeeper服务器很简单。该服务器包含在一个单一的jar文件中，所以安装包括创建一个配置。
 
 下载后解压到指定目录
 
@@ -43,7 +43,7 @@
 	bin/zkServer.sh start
 ZooKeeper使用log4j作为日志系统，更详细信息在参见编程者指南中的[Logging]()章节。你会看到日志消息到控制台（默认）和/或日志文件根据log4j配置。
 
-这里列出在独立模式下运行ZooKeeper的步骤。没有副本，所有如果ZooKeeper失败则服务将会down掉。这对于大多数开发环境是好的，但如果允许ZooKeeper副本，请参见[Running Replicated ZooKeeper](#sc_RunningReplicatedZooKeeper)
+这里列出在独立模式下运行ZooKeeper的步骤。没有副本，所以如果ZooKeeper失败则服务将会down掉。这对于大多数开发环境是好的，但如果允许ZooKeeper副本，请参见[Running Replicated ZooKeeper](#sc_RunningReplicatedZooKeeper)
 
 ### Zookeeper存储管理
 对于长时间运行的生产系统ZooKeeper必须管理外部存储（datadir和日志）。关于维护方面的细节，详情见（[维护]()）。
@@ -155,7 +155,7 @@ ZooKeeper使用log4j作为日志系统，更详细信息在参见编程者指南
 	dataLength = 4
 	numChildren = 0 
 
-最好，我们通过delete命令删除znode，如下：
+最后，我们通过delete命令删除znode，如下：
 	
 	[zkshell: 16] delete /zk_test
 	[zkshell: 17] ls /
@@ -167,7 +167,7 @@ ZooKeeper使用log4j作为日志系统，更详细信息在参见编程者指南
 ZooKeeper有Java绑定和C绑定，它们功能是一致的。C绑定存在两种形式：单线程和多线程。不同的只是在如何的消息传递循环。更多信息详见[ZooKeeper程序员指南中的编程示例]().
 
 ### 运行Replicated ZooKeeper
-在独立模式下运行管理员方便评价，开发，和测试。但在生产中，你应该运行在管理员复制模式。在同一个应用程序中的一个复制的服务器群被称为一个法定人数，并在复制的模式中，所有的服务器都具有相同的配置文件的副本。该文件是类似于一个用于独立模式，但有一些差异。这里就是一个例子：
+在独立模式下运行管理员方便评估，开发，和测试。但在生产中，你应该运行在ZooKeeper的副本模式下。在同一个应用程序中的一个复制的服务器群被称为一个法定人数，并在副本的模式中，所有的服务器都具有相同的配置文件的副本。该文件是类似于一个用于独立模式，但有一些差异。这里就是一个例子：
 	
 	tickTime=2000
 	dataDir=/var/lib/zookeeper
